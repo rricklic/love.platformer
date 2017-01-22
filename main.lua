@@ -23,6 +23,7 @@ maxPlayer1Y = yScreenPos + yScreenSize - 100
 minPlayer1Y = yScreenPos + 100
 score = 0
 
+--------------------------------------------------------------------------
 function love.load()
   love.graphics.setBackgroundColor(100, 100, 100)
 
@@ -53,15 +54,8 @@ function love.load()
   --WORLD TOP
   World.add(Ground:new(-50, -100, 900, 50, {255,255,0}))
 
-
+  --ENEMIES
   World.add(e1)
-
-  --BLOCK 2
-  --World.add(1500, 0, 20, 20, 
-  --  function(self, x, y, w, h)
-  --    love.graphics.setColor(255, 0, 0)
-  --    love.graphics.rectangle('fill', x, y, w, h)
-  --  end)
 end
 
 --------------------------------------------------------------------------
@@ -104,21 +98,6 @@ function love.update(dt)
 
   World.update(dt)
 
-  --if(player1.life <= 0 and player1.action ~= 4) then player1:die() end -- World.remove(player1) end
-  --if(player2.life <= 0 and player2.action ~= 4) then player2:die() end -- World.remove(player2) end
-  --if(player3.life <= 0 and player3.action ~= 4) then player3:die() end -- World.remove(player3) end
-  --if(player4.life <= 0 and player4.action ~= 4) then player4:die() end -- World.remove(player4) end
-
-
-
-  --hit goal
-  if player1.len > 0 and player1.cols[1].other == box2 then
-     score = score + 1
-     player1.x = 0
-     player1.y = 300
-     world:update(player1, 0, 300)
-  end
-
   --scrolling
   if (player1.x + player1.w > maxPlayer1X) then
      xScreenPos = xScreenPos + (player1.x + player1.w - maxPlayer1X)
@@ -137,13 +116,4 @@ function love.update(dt)
   minPlayer1X = xScreenPos + 100
   maxPlayer1Y = yScreenPos + yScreenSize - 100
   minPlayer1Y = yScreenPos + 100
-
-  --allow falling through bottom to restart at top of screen
-  --if player1.y > 600 then
-  --   player1.y = 0
-  --   world:update(player1, player1.x, 0)
-  --end
-
-  --local x2, y2, _, _ = world:getRect(box2)
-  --world:move(box2, x2 + 100*dt, y2 + 200*dt)
 end
