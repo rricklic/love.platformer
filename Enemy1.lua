@@ -31,7 +31,7 @@ function Enemy1:new(x, y, w, h, walkVel, color, name)
       color = color,
       name = name,
       touchDamage = 5,
-      touchPushBack = 100,
+      touchPushBack = 250,
       --state
       xVel = walkVel,
       yVel = 0,
@@ -135,12 +135,12 @@ function Enemy1:handleCollision()
   for i=1, self.len do
     --collision with player
     if(self.cols[i].other.isPlayer == 1) then
-       self.cols[i].other:takeDamage(self.cols[1].normal.x, self.touchDamage, self.touchPushBack)
+       self.cols[i].other:takeDamage(-self.cols[i].normal.x, self.touchDamage, self.touchPushBack)
     end 
 
     --collision with player attack
     if(self.cols[i].other.isAttack == 1) then
-       self:takeDamage(self.cols[1].normal.x, self.cols[i].other.damage, self.cols[i].other.pushBack)
+       self:takeDamage(self.cols[i].normal.x, self.cols[i].other.damage, self.cols[i].other.pushBack)
     end    
   end
 
